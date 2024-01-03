@@ -1,10 +1,11 @@
-const Router = require('express');
+const { Router } = require('express');
 const router = new Router();
+const doctorScheduleController = require('../controllers/doctorScheduleController');
 
-router.post("/", );
-router.get("/",);
-router.get("/:id",);
-router.delete("/:id");
-router.patch("/:id");
+/*router.post("/", doctorScheduleController.createDoctorSchedule);
+router.get("/", doctorScheduleController.getDoctorScheduleList);
+router.get("/:id", doctorScheduleController.getDoctorScheduleById);
+router.delete("/:id", doctorScheduleController.deleteDoctorScheduleById);
+router.patch("/:id", doctorScheduleController.updateDoctorScheduleById);*/
 
 module.exports = router;

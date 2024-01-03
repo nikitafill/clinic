@@ -1,13 +1,31 @@
 const sequelize = require('../db');
 const { DataTypes } = require('sequelize');
 
-  const Users = sequelize.define('Users', {
-    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    username: { type: DataTypes.STRING(50), allowNull: false },
-    password: { type: DataTypes.STRING(50), allowNull: false },
-    Patient_Id: { type: DataTypes.INTEGER },
-    Doctor_Id: { type: DataTypes.INTEGER },
-    IsEmployee: { type: DataTypes.BOOLEAN, allowNull: false },
+const Users = sequelize.define('Users', {
+  Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  email: { type: DataTypes.STRING(50), allowNull: false },
+  password: { type: DataTypes.STRING(50), allowNull: false },
+  Patient_Id: {
+      type: DataTypes.INTEGER,
+      validate: {
+          onlyOneIdPresent() {
+              if ((this.Patient_Id !== null && this.Doctor_Id !== null) || (this.Patient_Id === null && this.Doctor_Id === null)) {
+                  throw new Error('Either Patient_Id or Doctor_Id should be present');
+              }
+          },
+      },
+  },
+  Doctor_Id: {
+      type: DataTypes.INTEGER,
+      validate: {
+          onlyOneIdPresent() {
+              if ((this.Patient_Id !== null && this.Doctor_Id !== null) || (this.Patient_Id === null && this.Doctor_Id === null)) {
+                  throw new Error('Either Patient_Id or Doctor_Id should be present');
+              }
+          },
+      },
+  },
+  IsEmployee: { type: DataTypes.BOOLEAN, allowNull: false },
   });
   
   const MedicalResult = sequelize.define('MedicalResult', {
@@ -71,7 +89,7 @@ const { DataTypes } = require('sequelize');
   Doctor.hasMany(Users);
   Users.belongsTo(Doctor);
 
-  Patient.hasMany(Users);
+  Patient.hasMany(Users, { foreignKey: 'Patient_Id', onDelete: 'CASCADE' });
   Users.belongsTo(Patient);
 
   Appointment.hasMany(MedicalResult);

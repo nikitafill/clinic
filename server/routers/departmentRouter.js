@@ -1,12 +1,8 @@
-const Router = require('express');
+const { Router } = require('express');
 const router = new Router();
+const departmentController = require('../controllers/departmentController');
 
-router.post("/", );
-router.get("/",);
-router.get("/:id",);
-router.delete("/:id");
-router.patch("/:id");
-
-
+/*router.get("/", departmentController.getDepartmentList);
+router.get("/:id", departmentController.getDepartmentById);*/
 
 module.exports = router;
