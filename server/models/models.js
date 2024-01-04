@@ -29,7 +29,7 @@ const Users = sequelize.define('Users', {
   });
   
   const MedicalResult = sequelize.define('MedicalResult', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Diagnose: { type: DataTypes.STRING(50), allowNull: false },
     Conclusion: { type: DataTypes.STRING(50) },
     Date: { type: DataTypes.DATE },
@@ -40,7 +40,7 @@ const Users = sequelize.define('Users', {
   });
   
   const DoctorSchedule = sequelize.define('DoctorSchedule', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Doctors_Id: { type: DataTypes.INTEGER, allowNull: false },
     Day_of_week: { type: DataTypes.STRING(50), allowNull: false },
     Start: { type: DataTypes.TIME },
@@ -48,13 +48,13 @@ const Users = sequelize.define('Users', {
   });
   
   const Department = sequelize.define('Department', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Name: { type: DataTypes.STRING(50), allowNull: false },
     Specialization: { type: DataTypes.STRING(50) },
   });
   
   const Service = sequelize.define('Service', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Name: { type: DataTypes.STRING(50), allowNull: false },
     Cost: { type: DataTypes.DECIMAL },
     Specialization: { type: DataTypes.STRING(50) },
@@ -62,7 +62,7 @@ const Users = sequelize.define('Users', {
   });
   
   const Appointment = sequelize.define('Appointment', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Patient_Id: { type: DataTypes.INTEGER, allowNull: false },
     Service_Id: { type: DataTypes.INTEGER, allowNull: false },
     Date: { type: DataTypes.DATE, allowNull: false },
@@ -70,7 +70,7 @@ const Users = sequelize.define('Users', {
   });
   
   const Patient = sequelize.define('Patient', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Name: { type: DataTypes.STRING(50), allowNull: false },
     BirthDate: { type: DataTypes.DATE },
     Gender: { type: DataTypes.STRING(50) },
@@ -79,14 +79,14 @@ const Users = sequelize.define('Users', {
   });
   
   const Doctor = sequelize.define('Doctor', {
-    ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Name: { type: DataTypes.STRING(50), allowNull: false },
     Specialization: { type: DataTypes.STRING(50) },
     WorkExp: { type: DataTypes.INTEGER },
     Department_Id: { type: DataTypes.INTEGER, allowNull: false },
   });
 
-  Doctor.hasMany(Users);
+  Doctor.hasMany(Users, { foreignKey: 'Doctor_Id', onDelete: 'CASCADE' });
   Users.belongsTo(Doctor);
 
   Patient.hasMany(Users, { foreignKey: 'Patient_Id', onDelete: 'CASCADE' });
