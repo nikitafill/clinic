@@ -71,7 +71,7 @@ class UsersController {
         }
     }
 
-    async updateRole(req, res) {
+    /*async updateRole(req, res) {
         try {
             const { email, role, doctorData } = req.body;
 
@@ -116,7 +116,7 @@ class UsersController {
             console.error(error);
             res.status(500).json({ error: "Role update failed" });
         }
-    }
+    }*/
 }
 
 module.exports = new UsersController();
