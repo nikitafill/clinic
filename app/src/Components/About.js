@@ -12,30 +12,30 @@ function About() {
 
       <div className="about-text-content">
         <h3 className="about-title">
-          <span>About Us</span>
+          <span>О нас</span>
         </h3>
         <p className="about-description">
-          Welcome to Health Plus, your trusted partner for accessible and
-          personalized healthcare. Our expert doctors offer online consultations
-          and specialized services, prioritizing your well-being. Join us on
-          this journey towards a healthier you.
+          Добро пожаловать в Health +, вашего надежного партнера по доступному и
+          индивидуального медицинского обслуживания. Наши врачи-эксперты предлагают консультации
+          и специализированные услуги, ставя во главу угла ваше благополучие. Присоединяйтесь к нам
+          на пути к здоровому образу жизни.
         </p>
 
-        <h4 className="about-text-title">Your Solutions</h4>
+        <h4 className="about-text-title">Ваше решение</h4>
 
         <SolutionStep
-          title="Choose a Specialist"
-          description="Find your perfect specialist and book with ease at Health Plus. Expert doctors prioritize your health, offering tailored care."
+          title="Выберите специалиста"
+          description="Найдите своего идеального специалиста и легко записывайтесь на прием в Health Plus. Опытные врачи придают приоритет вашему здоровью, предлагая индивидуальный уход."
         />
 
         <SolutionStep
-          title="Make a Schedule"
-          description="Choose the date and time that suits you best, and let our dedicated team of medical professionals ensure your well-being with personalized care."
+          title="Запланируйте встречу"
+          description="Выберите дату и время, которые вам наилучшим образом подходят, и дайте нашей преданной команде медицинских специалистов обеспечить ваше благополучие с персонализированным уходом."
         />
 
         <SolutionStep
-          title="Get Your Solutions"
-          description="Our experienced doctors and specialists are here to provide expert advice and personalized treatment plans, helping you achieve your best possible health."
+          title="Получите свои решения"
+          description="Наши опытные врачи и специалисты готовы предоставить профессиональные советы и индивидуальные планы лечения, помогая вам достичь максимального здоровья."
         />
       </div>
     </div>

@@ -1,79 +1,85 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentDots,
-  faBars,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
 import "../Styles/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Navbar() {
+
+  const navigate = useNavigate();
+  
+  const handleLogoutClick = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    window.location.reload();
+  };
+
   const [nav, setNav] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const openNav = () => {
-    setNav(!nav);
-  };
-
-  const handleChatBtnClick = () => {
-    if (!isButtonDisabled) {
-      toast.info("Experiencing high traffic, Please wait a moment.", {
-        position: toast.POSITION.TOP_CENTER,
-        onOpen: () => setIsButtonDisabled(true),
-        onClose: () => setIsButtonDisabled(false),
-      });
-    }
-  };
+  const logOut = () => {
+    //user.setUser({})
+    //user.setIsAuth(false)
+  }
 
   return (
     <div className="navbar-section">
       <h1 className="navbar-title">
-        <Link to="/">
+        <Link to="/home">
           Health <span className="navbar-sign">+</span>
         </Link>
       </h1>
 
       {/* Desktop */}
       <ul className="navbar-items">
-        {/*<li>
-          <Link to="/" className="navbar-links">
-            Home
-          </Link>
-        </li>*/ }
         <li>
-          <a href="/review" className="navbar-links">
-            Reviews
-          </a>
-        </li>
-        <li>
-          <Link to="/service" className="navbar-links">
+          <Link to="/services" className="navbar-links">
               Услуги
           </Link>
         </li>
         <li>
-          <Link to="/price" className="navbar-links">
+          <Link to="/prices" className="navbar-links">
               Цены
           </Link>
         </li>
         <li>
-          <Link to="/doctor" className="navbar-links">
+          <Link to="/doctors" className="navbar-links">
               Врачи
           </Link>
         </li>
+        <button
+        className="navbar-btn"
+        type="button"
+        disabled={isButtonDisabled}
+        onClick={() => {
+        navigate("/appointment");
+        window.location.reload()}}
+      >Онлайн заявка</button>
       </ul>
 
+      <ul className = "navbar-items">
       <button
         className="navbar-btn"
         type="button"
         disabled={isButtonDisabled}
-        onClick={handleChatBtnClick}
-      >
-        <FontAwesomeIcon icon={faCommentDots} /> Live Chat
-      </button>
+        onClick={() => {
+        navigate("/profile");
+        window.location.reload()}}
+      >Профиль</button>
+      <button
+        className="navbar-btn"
+        type="button"
+        //disabled={isButtonDisabled}
+        onClick={handleLogoutClick}
+      >Выйти</button>
 
-      {/* Mobile */}
+      </ul>
+
+
+
+      {/*
+      {/* Mobile }
       <div className={`mobile-navbar ${nav ? "open-nav" : ""}`}>
         <div onClick={openNav} className="mobile-navbar-close">
           <FontAwesomeIcon icon={faXmark} className="hamb-icon" />
@@ -84,7 +90,7 @@ function Navbar() {
             <Link onClick={openNav} to="/">
               Home
             </Link>
-            </li>*/}
+            </li>}
           <li>
             <a onClick={openNav} href="#reviews">
               Reviews
@@ -103,14 +109,14 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* Hamburger Icon */}
+      {/* Hamburger Icon }
       <div className="mobile-nav">
         <FontAwesomeIcon
           icon={faBars}
           onClick={openNav}
           className="hamb-icon"
         />
-      </div>
+        </div>*/}
     </div>
   );
 }

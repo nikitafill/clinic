@@ -1,6 +1,5 @@
 import React from "react";
 import InformationCard from "./InformationCard";
-import { faHeartPulse, faTruckMedical, faTooth } from "@fortawesome/free-solid-svg-icons";
 import "../Styles/Info.css";
 
 function Info() {
@@ -8,46 +7,37 @@ function Info() {
     <div className="info-section" id="services">
       <div className="info-title-content">
         <h3 className="info-title">
-          <span>What We Do</span>
+          <span>Что мы делаем</span>
         </h3>
         <p className="info-description">
-          We bring healthcare to your convenience, offering a comprehensive
-          range of on-demand medical services tailored to your needs. Our
-          platform allows you to connect with experienced online doctors who
-          provide expert medical advice, issue online prescriptions, and offer
-          quick refills whenever you require them.
+        «Health +» – современный многопрофильный медицинский центр, в котором созданы все необходимые условия
+        для ранней и своевременной диагностики различных заболеваний, их лечения, а также поддержания здоровья.
+        В медицинском центре предусмотрена предварительная запись на прием в удобное для пациента время.
+        Мы ценим Ваше время и заботимся о Вашем здоровье.
+        Клиника «Health +»: с заботой о жизни.
         </p>
       </div>
-
       <div className="info-cards-content">
-        <InformationCard
-          title="Emergency Care"
-          description="Our Emergency Care service is designed to be your reliable support
-            in critical situations. Whether it's a sudden illness, injury, or
-            any medical concern that requires immediate attention, our team of
-            dedicated healthcare professionals is available 24/7 to provide
-            prompt and efficient care."
-          icon={faTruckMedical}
-        />
+      <InformationCard
+        title="Здоровье женщин"
+        description="Наши услуги в области здоровья женщин ориентированы на комплексный уход за женщинами всех возрастов. 
+        От регулярных обследований до специализированного ухода, наша команда медицинских специалистов посвятила себя 
+        продвижению и поддержанию здоровья и благополучия женщин."
+      />
 
-        <InformationCard
-          title="Heart Disease"
-          description="Our team of experienced cardiologists and medical experts use
-            state-of-the-art technology to assess your cardiovascular health and
-            design personalized treatment plans. From comprehensive screenings
-            to advanced interventions, we are committed to helping you maintain
-            a healthy heart and lead a fulfilling life."
-          icon={faHeartPulse}
-        />
+      <InformationCard
+        title="Заболевания сердца"
+        description="Наша команда опытных кардиологов и медицинских экспертов использует передовые технологии для оценки состояния 
+        вашего сердечно-сосудистого здоровья и создания персонализированных планов лечения. От комплексных обследований до 
+        передовых вмешательств, мы стремимся помочь вам поддерживать здоровое сердце и вести насыщенную жизнь."
+      />
 
-        <InformationCard
-          title="Dental Care"
-          description="Smile with confidence as our Dental Care services cater to all your
-            oral health needs. Our skilled dentists provide a wide range of
-            treatments, from routine check-ups and cleanings to cosmetic
-            procedures and restorative treatments."
-          icon={faTooth}
-        />
+      <InformationCard
+        title="Ортопедические услуги"
+        description="Ощутите облегчение от проблем опорно-двигательного аппарата с нашими ортопедическими услугами. 
+        Наша команда ортопедов предлагает передовую диагностику и персонализированные планы лечения для решения 
+        широкого спектра заболеваний костей и суставов, помогая вам восстановить подвижность и жить без боли."
+      />
       </div>
     </div>
   );

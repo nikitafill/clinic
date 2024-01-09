@@ -71,12 +71,6 @@ function AppointmentForm() {
 
   return (
     <div className="appointment-form-section">
-      <h1 className="legal-siteTitle">
-        <Link to="/">
-          Health <span className="legal-siteSign">+</span>
-        </Link>
-      </h1>
-
       <div className="form-container">
         <h2 className="form-title">
           <span>Book Appointment Online</span>
@@ -117,7 +111,6 @@ function AppointmentForm() {
               <option value="default">Select</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="private">I will inform Doctor only</option>
             </select>
             {formErrors.patientGender && <p className="error-message">{formErrors.patientGender}</p>}
           </label>
@@ -135,19 +128,6 @@ function AppointmentForm() {
           </label>
 
           <br />
-          <label>
-            Preferred Mode:
-            <select
-              value={preferredMode}
-              onChange={(e) => setPreferredMode(e.target.value)}
-              required
-            >
-              <option value="default">Select</option>
-              <option value="voice">Voice Call</option>
-              <option value="video">Video Call</option>
-            </select>
-            {formErrors.preferredMode && <p className="error-message">{formErrors.preferredMode}</p>}
-          </label>
 
           <br />
           <button type="submit" className="text-appointment-btn">
@@ -156,10 +136,6 @@ function AppointmentForm() {
 
           <p className="success-message" style={{display: isSubmitted ? "block" : "none"}}>Appointment details has been sent to the patients phone number via SMS.</p>
         </form>
-      </div>
-
-      <div className="legal-footer">
-        <p>© 2013-2023 Health+. All rights reserved.</p>
       </div>
 
       <ToastContainer autoClose={5000} limit={1} closeButton={false} />

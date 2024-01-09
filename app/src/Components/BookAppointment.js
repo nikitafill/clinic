@@ -23,26 +23,23 @@ function BookAppointment() {
 
       <div className="ba-text-content">
         <h3 className="ba-title">
-          <span>Why Choose Health</span>
+          <span>Зачем выбирать наш центр</span>
         </h3>
         <p className="ba-description">
-          Discover the reasons to choose Health Plus for your healthcare needs.
-          Experience expert care, convenience, and personalized solutions,
-          making your well-being our top priority. Join us on a journey to
-          better health and a happier life.
+          Откройте для себя причины, по которым стоит выбрать Health Plus для своего медицинского обслуживания.
+          Получите квалифицированную помощь, удобство и индивидуальные решения,
+          Мы делаем ваше благополучие нашим главным приоритетом. Присоединяйтесь к нам на пути к
+          к лучшему здоровью и более счастливой жизни.
         </p>
 
         <p className="ba-checks ba-check-first">
-          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> Best Professional Doctors
+          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> Лучшие профессиональные врачи
         </p>
         <p className="ba-checks">
-          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> Emergency Care
-        </p>
-        <p className="ba-checks">
-          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> 24/7 Support Live Chat
+          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> Предоставление результатов приема онлайн
         </p>
         <p className="ba-checks ba-check-last">
-          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> Enrollment Easy and Quick
+          <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#1E8FFD" }} /> Легкая и быстрая запись на прием
         </p>
 
         <button
@@ -50,7 +47,7 @@ function BookAppointment() {
           type="button"
           onClick={handleBookAppointmentClick}
         >
-          <FontAwesomeIcon icon={faCalendarCheck} /> Book Appointment
+          Онлайн заявка
         </button>
       </div>
     </div>

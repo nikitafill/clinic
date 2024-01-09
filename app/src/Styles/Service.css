@@ -34,4 +34,16 @@
   font-family: 'Poppins', sans-serif;
   font-size: 40px;
   font-weight: bold;
+  text-decoration: none;
+}
+.info-cards-content a {
+  text-decoration: none; /* Отключение стиля подчеркивания для ссылок */
+  color: inherit; /* Использование цвета текста родительского элемента */
+}
+
+.info-cards-content a:hover {
+  color: inherit; /* Использование цвета текста родительского элемента при наведении */
+}
+.info-cards-content{
+  margin-left: 64px;
 }

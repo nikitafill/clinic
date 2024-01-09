@@ -1,36 +1,28 @@
 import React from "react";
+import {Table} from 'react-bootstrap';
 
-function Table(props) {
-  if (!props.data || !Array.isArray(props.data)) {
-    return (
-      <div className="table-container">
-        <p className="table-title">{props.title}</p>
-        <p>No data available</p>
-      </div>
-    );
-  }
-
+function BasicTable(props) {
   return (
-    <div className="table-container">
+    <div>
       <p className="table-title">{props.title}</p>
-      <table>
-        <thead>
-          <tr>
-            <th className="wider-column">Наименование услуг</th>
-            <th className="slim-column">Цена</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table  bordered className="table">
+      <thead>
+        <tr>
+          <th className="name-column">Наименование услуг</th>
+          <th className="price-column">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
           {props.data.map((item, index) => (
             <tr key={index}>
               <td>{item.serviceName}</td>
               <td>{item.price}</td>
             </tr>
           ))}
-        </tbody>
-      </table>
+      </tbody>
+    </Table>
     </div>
   );
 }
 
-export default Table;
+export default BasicTable;

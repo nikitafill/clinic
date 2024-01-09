@@ -11,14 +11,14 @@ function Doctors() {
     <div className="doctor-section" id="doctors">
       <div className="dt-title-content">
         <h3 className="dt-title">
-          <span>Meet Our Doctors</span>
+          <span>Наши доктора</span>
         </h3>
 
         <p className="dt-description">
-          Meet our exceptional team of specialist doctors, dedicated to
-          providing top-notch healthcare services at Health Plus. Trust in their
-          knowledge and experience to lead you towards a healthier and happier
-          life.
+          Познакомьтесь с нашей исключительной командой врачей-специалистов, посвятивших себя
+          предоставлять первоклассные медицинские услуги в Health Plus. Доверьтесь их
+          знаниям и опыту, которые приведут вас к более здоровой и счастливой
+          жизни.
         </p>
       </div>
 
@@ -43,13 +43,6 @@ function Doctors() {
           title="Endocrinologists"
           stars="4.7"
           reviews="450"
-        />
-        <DoctorCard
-          img={profile4}
-          name="Dr. Albert Flores"
-          title="Hematologists"
-          stars="4.8"
-          reviews="500"
         />
       </div>
     </div>

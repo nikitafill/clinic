@@ -13,16 +13,6 @@
 .form-title > span {
     position: relative;
 }
-.form-title span::before {
-    content: '';
-    position: absolute;
-    width: 75%;
-    height: 4px;
-    background-color: #9D2553;
-    border-radius: 8px;
-    left: 0;
-    bottom: -12px;
-}
 /* Form */
 .form-content label {
     margin: 0 0 16px 0;

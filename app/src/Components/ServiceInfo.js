@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import InformationCard_2 from "./InformationCard_2";
-import { faHeartPulse, faTruckMedical, faTooth } from "@fortawesome/free-solid-svg-icons";
 import "../Styles/Service.css";
 import endo from "../Assets/endo.png";
 import surgery from "../Assets/surgery.png";
@@ -15,59 +15,57 @@ function ServiceInfo() {
   return (
     <div className="service-section" id="services">
       <div className="service-title-content">
-        <h3 className="service-title">Услуги
-        </h3>
+        <h3 className="service-title">Услуги</h3>
         <p className="service-description">
-        Медицинский центр «ГЕНЕЗ» — оказывает услуги на платной основе в Могилеве.  
-        Здесь вы получите квалифицированную помощь, а также консультации лучших специалистов по направлениям: 
-        УЗИ, гинекология, урология, кардиология, эндокринология, психотерапия, функциональная диагностика, неврология, 
-        офтальмология, хирургия и педиатрия.
+          Медицинский центр «ГЕНЕЗ» — оказывает услуги на платной основе в Могилеве.
+          Здесь вы получите квалифицированную помощь, а также консультации лучших
+          специалистов по направлениям: УЗИ, гинекология, урология, кардиология,
+          эндокринология, психотерапия, функциональная диагностика, неврология,
+          офтальмология, хирургия и педиатрия.
         </p>
       </div>
 
       <div className="info-cards-content">
         <div className="row">
+          <Link to="/services/cardio">
+            <InformationCard_2 img={cardio} title="Кардиология" />
+          </Link>
 
-          <InformationCard_2
-            img={cardio}
-            title="Кардиология"
-          />
-          
-          <InformationCard_2
-            img={neuro} 
-            title="Неврология"
-          />
+          <Link to="/services/neuro">
+            <InformationCard_2 img={neuro} title="Неврология" />
+          </Link>
 
-          <InformationCard_2
-            img={orth}
-            title="Ортопедия"
-          />
+          {/*<Link to="/services/orth">
+            <InformationCard_2 img={orth} title="Ортопедия" />
+          </Link>*/}
         </div>
 
         <div className="row">
-          <InformationCard_2
-            img={urol}
-            title="Урология"
-          />
+          <Link to="/services/urol">
+            <InformationCard_2 img={urol} title="Урология" />
+          </Link>
 
-          <InformationCard_2
-            img={gynaec}
-            title="Гинекология"
-          />
-          <InformationCard_2
-            img={endo}
-            title="Эндокринология"
-          />
+          <Link to="/services/gynaec">
+            <InformationCard_2 img={gynaec} title="Гинекология" />
+          </Link>
+
+          {/*<Link to="/services/endo">
+            <InformationCard_2 img={endo} title="Эндокринология" />
+          </Link>*/}
         </div>
         <div className="row">
-          <InformationCard_2
-            img={surgery}
-            title="Хирургия"
-          />
-          <InformationCard_2
-            img={analyses}
-            title="Диагностика"
-          />
+          <Link to="/services/orth">
+            <InformationCard_2 img={orth} title="Ортопедия" />
+          </Link>
+          {/*<Link to="/services/surgery">
+            <InformationCard_2 img={surgery} title="Хирургия" />
+          </Link>*/}
+          <Link to="/services/endo">
+            <InformationCard_2 img={endo} title="Эндокринология" />
+          </Link>
+          {/*<Link to="/services/analyses">
+            <InformationCard_2 img={analyses} title="Диагностика" />
+          </Link>*/}
         </div>
       </div>
     </div>
