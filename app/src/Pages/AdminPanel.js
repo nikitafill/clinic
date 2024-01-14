@@ -22,6 +22,7 @@ const AdminPanel = () => {
                 Добавить врача
             </Button>
             {doctorVisible && <CreateDoctor onHide={() => setDoctor(false)} />}
+
             <Button
                 variant="primary"
                 className="mt-4 p-2"
@@ -30,12 +31,22 @@ const AdminPanel = () => {
                 Добавить медициский результат
             </Button>
             {medResultVisible && <CreateMedResult onHide={() => setMedResult(false)} />}
+
             <Button
                 variant="primary"
                 className="mt-4 p-2"
                 onClick={() => setService(!serviceVisible)}
             >
                 Добавить услугу
+            </Button>
+            {serviceVisible && <CreateServiceForm onHide={() => setService(false)} />}
+
+            <Button
+                variant="primary"
+                className="mt-4 p-2"
+                onClick={() => setService(!serviceVisible)}
+            >
+                Поиск медициской карты пациента
             </Button>
             {serviceVisible && <CreateServiceForm onHide={() => setService(false)} />}
         </Container>

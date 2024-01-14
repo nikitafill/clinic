@@ -16,14 +16,14 @@ import Appointment from "../Components/AppointmentForm";
 import AdminPanel from "../Pages/AdminPanel";
 
 export const adminRoutes = [
-    {
+    /*{
         path: "/login",
         Component: LoginPage,
     },
     {
         path: "/registration",
         Component: RegistrationPage,
-    },
+    },*/
     {
         path: "/home",
         Component: Home,

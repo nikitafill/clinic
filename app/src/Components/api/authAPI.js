@@ -52,21 +52,25 @@ export { login, checkEmail, registration};*/
 import { $authHost, $host } from ".";
 import { jwtDecode } from "jwt-decode";
 
-export const registration = async ({ email, password }) => {
-      const { data } = await $host.post("api/users/registration", { email, password });
+export const registration = async (userData) => {
+    const response = await $host.post("api/users/registration", userData);
+    return response;
+};
+/*export const registration = async ({ email, password }) => {
+      const data = await $host.post("api/users/registration", { email, password });
+      console.log(data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('isAuth', true);
       return jwtDecode(data.token);
-  }
+}*/
+
 export const login = async (email, password) => {
-    const { data } = await $host.post("api/users/login", { email, password } );
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('isAuth', true);
-    return jwtDecode(data.token);
+    const response  = await $host.post("api/users/login", { email, password } );
+    return response;
 }
 
-export const check = async () => {
-    const response = await $authHost.post('api/users/auth');
-    localStorage.setItem('token', response.data);
+export const check = async (email) => {
+    const response = await $authHost.post('api/users/auth',email);
+    //localStorage.setItem('token', response.data);
     return response;
 }

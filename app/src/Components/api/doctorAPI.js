@@ -1,8 +1,10 @@
 import { $authHost, $host } from ".";
+import { jwtDecode } from "jwt-decode";
 
-export const createDoctor = async (doctor) => {
-    const {data} = await $authHost.post('api/doctors/', doctor)
-    return data
+export const createDoctor = async ({ email, password }) => {
+    const {data} = await $authHost.post('api/doctor/create', { email, password });
+    localStorage.setItem('token', data.token);
+    return jwtDecode(data.token);
 }
 
 export const getAllDoctors = async () => {

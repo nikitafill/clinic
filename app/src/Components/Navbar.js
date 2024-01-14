@@ -1,27 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/Navbar.css";
 import { Link,useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function Navbar() {
 
   const navigate = useNavigate();
-  
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Проверяем наличие токена в локальном хранилище
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
+  }, []);
+
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("role");
+    localStorage.removeItem('isEmployee');
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("role");
+    sessionStorage.removeItem('isEmployee');
+    setIsAuthenticated(false);
+
+    /*if (!localStorage.getItem("token")) {
+      sessionStorage.clear();
+    }*/
     window.location.reload();
   };
-
-  const [nav, setNav] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  const logOut = () => {
-    //user.setUser({})
-    //user.setIsAuth(false)
-  }
 
   return (
     <div className="navbar-section">
@@ -57,7 +62,7 @@ function Navbar() {
         window.location.reload()}}
       >Онлайн заявка</button>
       </ul>
-
+      {isAuthenticated ? (
       <ul className = "navbar-items">
       <button
         className="navbar-btn"
@@ -67,6 +72,7 @@ function Navbar() {
         navigate("/profile");
         window.location.reload()}}
       >Профиль</button>
+
       <button
         className="navbar-btn"
         type="button"
@@ -75,7 +81,19 @@ function Navbar() {
       >Выйти</button>
 
       </ul>
-
+      ):(
+        <li>
+          <button
+            className="navbar-btn"
+            type="button"
+            onClick={() => {
+              navigate("/login"); // Предположим, что есть страница входа по пути "/login"
+            }}
+          >
+            Войти
+          </button>
+        </li>
+      )}
 
 
       {/*

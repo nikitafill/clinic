@@ -14,7 +14,7 @@ const AppRouter = () => {
         const handleStorageChange = () => {
             setToken(localStorage.getItem("token"));
             setTokenSession(sessionStorage.getItem("token"));
-            navigate("/home");
+            navigate(USER_MAIN_MENU_ROUTE);
         };
 
         window.addEventListener("storage", handleStorageChange);
@@ -48,7 +48,7 @@ const AppRouter = () => {
                 {publicRoutes.map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} exact />
                 ))}
-                <Route key="*" path="*" element={<Navigate to={LOGIN_ROUTE} />} />
+                <Route key="*" path="*" element={<Navigate to={USER_MAIN_MENU_ROUTE} />} />
             </Routes>
         );
     }
