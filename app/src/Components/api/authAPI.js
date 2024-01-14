@@ -52,22 +52,21 @@ export { login, checkEmail, registration};*/
 import { $authHost, $host } from ".";
 import { jwtDecode } from "jwt-decode";
 
-export const registration = async (email, password) => {
-    const { data } = await $host.post("api/user/registration", { email, password, role: 'USER' })
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('isAuth', true)
-    return jwtDecode(data.token)
-}
-
+export const registration = async ({ email, password }) => {
+      const { data } = await $host.post("api/users/registration", { email, password });
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('isAuth', true);
+      return jwtDecode(data.token);
+  }
 export const login = async (email, password) => {
-    const { data } = await $host.post("api/user/login", { email, password })
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('isAuth', true)
-    return jwtDecode(data.token)
+    const { data } = await $host.post("api/users/login", { email, password } );
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('isAuth', true);
+    return jwtDecode(data.token);
 }
 
 export const check = async () => {
-    const response = await $authHost.post('api/user/check')
-    localStorage.setItem('token', response.data)
-    return response
+    const response = await $authHost.post('api/users/auth');
+    localStorage.setItem('token', response.data);
+    return response;
 }

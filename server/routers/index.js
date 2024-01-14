@@ -8,7 +8,6 @@ const medicalResultRouter = require('./medicalResultRouter');
 const patientRouter = require("./patientRouter");
 const serviceRouter = require("./serviceRouter");
 const usersRouter = require("./usersRouter");
-const usersMiddleware = require("../middleware/authMiddleware");
 
 router.use('/users', usersRouter);
 router.use('/service', serviceRouter);
@@ -18,6 +17,5 @@ router.use('/doctorSchedule', doctorScheduleRouter);
 router.use('/doctor', doctorRouter);
 router.use('/appointment', appointmentRouter);
 router.use('/department', departmentRouter);
-router.use("/api", usersMiddleware);
 
 module.exports = router;

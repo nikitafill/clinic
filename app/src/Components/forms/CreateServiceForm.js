@@ -1,20 +1,18 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import '../../Styles/ServiceForm.css'; // Импорт ваших пользовательских стилей
 import { createService } from "../api/servicesAPI";
 import { useNavigate } from "react-router-dom";
 
-const CreateService = ({ serviceData, setServiceData }) => {
+const CreateServiceForm = () => {
   const navigate = useNavigate();
   const [serviceName, setServiceName] = useState('');
   const [cost, setCost] = useState('');
   const [specialization, setSpecialization] = useState('');
   const [departmentId, setDepartmentId] = useState('');
 
-  const handleAddService = (e) => {
-    e.preventDefault();
-
+  const handleAddService = () => {
     // Проверка на валидность serviceName, cost, specialization, departmentId
     if (!serviceName || !cost || !specialization || !departmentId) {
       // Обработка пустых полей
@@ -26,31 +24,19 @@ const CreateService = ({ serviceData, setServiceData }) => {
       console.error(errorMessage);
     };
 
-    setServiceData({
-      name: serviceName,
-      cost: cost,
-      specialization: specialization,
-      departmentId: departmentId,
-    });
-
+    const serviceData = {
+      Name: serviceName,
+      Cost: cost,
+      Specialization: specialization,
+      DepartmentId: departmentId,
+    };
     createService(serviceData)
-      .then((response) => {
-        if (!response) {
-          errorHandler("Сервис временно недоступен");
-          return;
-        }
-
-        if (response.status >= 300) {
-          errorHandler("Ошибка при добавлении услуги. Код: " + response.status);
-          return;
-        }
-
-        // Успешное добавление услуги, переход на нужную страницу
-        navigate("/services");
-      })
-      .catch((error) => {
-        console.log("Error while adding service:", error);
-      });
+        .then((data) => {
+            navigate("/prices")
+        })
+        .catch((error) => {
+            console.error("Error creating service:", error);
+    });
   };
 
   return (
@@ -105,4 +91,4 @@ const CreateService = ({ serviceData, setServiceData }) => {
   );
 };
 
-export default CreateService;
+export default CreateServiceForm;

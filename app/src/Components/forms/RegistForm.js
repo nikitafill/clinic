@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../Styles/PersonalInfoForm.css';
-import { registration } from "../../Components/api/authApi";
+import { registration } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 
-const RegistrationPage =  () => {
-
+const CombinedForm = ({ setUserData }) => {
+  const navigate = useNavigate();
   const [Name, setName] = useState('');
   const [Birthdate, setBirthdate] = useState('');
   const [Gender, setGender] = useState('');
@@ -17,9 +17,8 @@ const RegistrationPage =  () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const navigate = useNavigate();
-
-  const handleRegister =  () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
 
     if (!Name || !Number || !Gender || !email || !password || !confirmPassword) {
       // Handle empty fields
@@ -31,21 +30,7 @@ const RegistrationPage =  () => {
       return;
     }
 
-    const errorHandler = (errorMessage) => {
-      // Обработка ошибки, например, вывод сообщения об ошибке пользователю
-      console.error(errorMessage);
-    };
-
-    const userData = {
-      Name: Name,
-      Birthdate: Birthdate,
-      Gender: Gender,
-      Number: Number,
-      Adress: Adress,
-      email: email,
-      password: password,
-    };
-    /*setUserData({
+    setUserData({
       name: Name,
       birthdate: Birthdate,
       gender: Gender,
@@ -53,30 +38,9 @@ const RegistrationPage =  () => {
       adress: Adress,
       email: email,
       password: password,
-    });*/
-    //const response = await registration(email, password, Name, Birthdate, Gender, Number, Adress);
-    const response  = registration(userData);
-    navigate("/login");
-    /*registration(userData)
-    .then((data) => {
-      if (!data) {
-        console.error("Сервис временно недоступен");
-        return;
-      }
-      navigate("/login")
-    })
-    .catch((error) => {
-      console.error("Error creating service:", error);
-    });*/
-    /*  console.error("Error creating service:", error);
-    if (response.error) {
-      console.log("Ошибка регистрации:", response.error);
-    } 
-    else if (response.success) {
-      console.log("Успешный вход!");
-      navigate('/home');
-    */
-    /*registration(email, password)
+    });
+
+    registration(email, password)
       .then((response) => {
         if (!response) {
           console.error("Сервис временно недоступен");
@@ -92,7 +56,7 @@ const RegistrationPage =  () => {
       })
       .catch((error) => {
         console.error("Error while registering user:", error);
-      });*/
+      });
       
   };
 
@@ -196,4 +160,4 @@ const RegistrationPage =  () => {
   );
 };
 
-export default RegistrationPage;
+export default CombinedForm;

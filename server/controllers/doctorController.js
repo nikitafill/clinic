@@ -1,19 +1,44 @@
-const { Doctor } = require("../models/models");
+const {Users,  Doctor } = require("../models/models");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const generateJwt = (Id, email ) => {
+    return jwt.sign(
+        { Id, email },
+        process.env.SECRET_KEY,
+        { expiresIn: '24h' }
+    );
+}
 
 class DoctorController {
     async createDoctor(req, res) {
         try {
-            const { Name, Specialization, WorkExp, Department_Id } = req.body;
+            const { Name, Specialization, WorkExp, DepartmentId, email, password  } = req.body;
 
-            // Создание нового доктора
+            const existingUser = await Users.findOne({ where: { email } });
+
+            if (existingUser) {
+                return res.status(401).json({ error: "Registration failed" });
+            }
+            const hashedPassword = await bcrypt.hash(password, 5);
+
             const newDoctor = await Doctor.create({
                 Name,
                 Specialization,
                 WorkExp,
-                Department_Id,
+                DepartmentId,
             });
 
-            res.status(201).json(newDoctor);
+            const newUser = await Users.create({
+                email: email,
+                password: hashedPassword,
+                IsEmployee: true,
+                DoctorId: newDoctor.Id  
+            });
+
+            const token= generateJwt( newDoctor.Id, newUser.email );
+
+            res.status(201).json(token);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Failed to create doctor" });
@@ -62,8 +87,14 @@ class DoctorController {
         try {
             // Получение списка всех докторов
             const doctors = await Doctor.findAll();
+            
+            const simplifiedDoctors = doctors.map(doctor => ({
+                name: doctor.Name,
+                specialization: doctor.Specialization,
+                workExp: doctor.WorkExp
+            }));
 
-            res.status(200).json(doctors);
+            res.status(200).json(simplifiedDoctors);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Failed to get doctor list" });

@@ -70,7 +70,7 @@ function Navbar() {
       <button
         className="navbar-btn"
         type="button"
-        //disabled={isButtonDisabled}
+        disabled={isButtonDisabled}
         onClick={handleLogoutClick}
       >Выйти</button>
 

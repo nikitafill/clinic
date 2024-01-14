@@ -1,9 +1,10 @@
 const { MedicalResult } = require("../models/models");
 
 class MedicalResultController {
+
     async createMedicalResult(req, res) {
         try {
-            const { Diagnose, Conclusion, Date, Doctor_Id, Patient_Id, Appointment_Id, Picture } = req.body;
+            const { Diagnose, Conclusion, Date, Doctor_Id, Patient_Id, Appointment_Id } = req.body;
 
             // Создание нового медицинского результата
             const newMedicalResult = await MedicalResult.create({
@@ -13,7 +14,6 @@ class MedicalResultController {
                 Doctor_Id,
                 Patient_Id,
                 Appointment_Id,
-                Picture,
             });
 
             res.status(201).json(newMedicalResult);
@@ -25,7 +25,7 @@ class MedicalResultController {
 
     async getMedicalResultById(req, res) {
         try {
-            const resultId = req.params.id;
+            const resultId = req.params.Id;
 
             // Поиск медицинского результата по ID
             const medicalResult = await MedicalResult.findByPk(resultId);
@@ -55,13 +55,13 @@ class MedicalResultController {
 
     async updateMedicalResultById(req, res) {
         try {
-            const resultId = req.params.id;
+            const resultId = req.params.Id;
             const { Diagnose, Conclusion, Date, Doctor_Id, Patient_Id, Appointment_Id, Picture } = req.body;
 
             // Обновление медицинского результата
             const updatedMedicalResult = await MedicalResult.update(
                 { Diagnose, Conclusion, Date, Doctor_Id, Patient_Id, Appointment_Id, Picture },
-                { where: { ID: resultId } }
+                { where: { Id: resultId } }
             );
 
             if (!updatedMedicalResult[0]) {

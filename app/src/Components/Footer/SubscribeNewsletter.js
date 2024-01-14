@@ -32,7 +32,7 @@ function SubscribeNewsletter() {
 
   return (
     <div className="ft-info-p2">
-      <p className="ft-input-title">Stay Update to our Newsletter</p>
+      <p className="ft-input-title">Подпишитесь на нашу рассылку</p>
       <input
         type="text"
         inputMode="email"
@@ -49,7 +49,7 @@ function SubscribeNewsletter() {
         disabled={isButtonDisabled}
         onClick={handleBookAppointmentClick}
       >
-        Subscribe
+        Подписаться
       </button>
 
       <ToastContainer autoClose={4000} limit={1} closeButton={false} />

@@ -1,6 +1,6 @@
 import React from "react";
-import InformationCard from "./InformationCard";
-import "../Styles/Info.css";
+import InformationCard from "../InformationCard";
+import "../../Styles/Info.css";
 
 function Info() {
   return (

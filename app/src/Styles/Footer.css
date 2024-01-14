@@ -76,7 +76,7 @@
 }
 /* Lists */
 .ft-list-title {
-    margin: 16px 0;
+    margin: 0 0;
     font-family: 'Rubik', sans-serif;
     font-size: 24px;
     font-weight: bold;
@@ -85,14 +85,14 @@
 .ft-list-items {
     list-style-type: none;
 }
-.ft-list-items li a {
+.ft-list-items li a p{
     text-decoration: none;
     color: #a5a7ac;
     padding: 0 0 2px 0;
     border-bottom: 2px dotted transparent;
     transition: border .2s ease;
 }
-.ft-list-items li {
+.ft-list-items li p {
     margin: 24px 0;
     font-family: 'Rubik', sans-serif;
     font-size: 16px;

@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 const Users = sequelize.define('Users', {
   Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING(50), allowNull: false },
-  password: { type: DataTypes.STRING(50), allowNull: false },
+  password: { type: DataTypes.STRING(255), allowNull: false },
   /*Patient_Id: {
       type: DataTypes.INTEGER,
       validate: {
@@ -34,14 +34,13 @@ const Users = sequelize.define('Users', {
     Diagnose: { type: DataTypes.STRING(50), allowNull: false },
     Conclusion: { type: DataTypes.STRING(50) },
     Date: { type: DataTypes.DATE },
-    Doctor_Id: { type: DataTypes.INTEGER, allowNull: false },
-    Patietn_Id: { type: DataTypes.INTEGER, allowNull: false },
+    //Doctor_Id: { type: DataTypes.INTEGER, allowNull: false },
+    //Patietn_Id: { type: DataTypes.INTEGER, allowNull: false },
     //Appoitment_Id: { type: DataTypes.INTEGER },
   },
   {timestamps: false});
   const DoctorSchedule = sequelize.define('DoctorSchedule', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    Doctors_Id: { type: DataTypes.INTEGER, allowNull: false },
     Day_of_week: { type: DataTypes.STRING(50), allowNull: false },
     Start: { type: DataTypes.TIME },
     End: { type: DataTypes.TIME },
@@ -63,8 +62,8 @@ const Users = sequelize.define('Users', {
   {timestamps: false});
   const Appointment = sequelize.define('Appointment', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    Patient_Id: { type: DataTypes.INTEGER, allowNull: false },
-    Service_Id: { type: DataTypes.INTEGER, allowNull: false },
+    //Patient_Id: { type: DataTypes.INTEGER, allowNull: false },
+    //Service_Id: { type: DataTypes.INTEGER, allowNull: false },
     Date: { type: DataTypes.DATE, allowNull: false },
     //Doctor_Id: { type: DataTypes.INTEGER, allowNull: false },
   },

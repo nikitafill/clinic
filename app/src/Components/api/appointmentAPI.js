@@ -1,6 +1,6 @@
 import { $authHost, $host } from ".";
 
-export const createAppointment = async () => {
+export const createAppointment = async (appointment) => {
     const {data} = await $host.post('api/appointment/create/', appointment)
     return data
 }

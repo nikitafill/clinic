@@ -12,41 +12,37 @@ function AppointmentForm() {
   const [patientNumber, setPatientNumber] = useState("");
   const [patientGender, setPatientGender] = useState("default");
   const [appointmentTime, setAppointmentTime] = useState("");
-  const [preferredMode, setPreferredMode] = useState("default");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate form inputs
+    // Валидация ввода формы
     const errors = {};
     if (!patientName.trim()) {
-      errors.patientName = "Patient name is required";
+      errors.patientName = "Требуется указать имя пациента";
     } else if (patientName.trim().length < 8) {
-      errors.patientName = "Patient name must be at least 8 characters";
+      errors.patientName = "Имя пациента должно содержать не менее 8 символов";
     }
 
     if (!patientNumber.trim()) {
-      errors.patientNumber = "Patient phone number is required";
+      errors.patientNumber = "Требуется указать номер телефона пациента";
     } else if (patientNumber.trim().length !== 10) {
-      errors.patientNumber = "Patient phone number must be of 10 digits";
+      errors.patientNumber = "Номер телефона пациента должен содержать 10 цифр";
     }
 
     if (patientGender === "default") {
-      errors.patientGender = "Please select patient gender";
+      errors.patientGender = "Пожалуйста, выберите пол пациента";
     }
     if (!appointmentTime) {
-      errors.appointmentTime = "Appointment time is required";
+      errors.appointmentTime = "Требуется указать время приема";
     } else {
       const selectedTime = new Date(appointmentTime).getTime();
       const currentTime = new Date().getTime();
       if (selectedTime <= currentTime) {
-        errors.appointmentTime = "Please select a future appointment time";
+        errors.appointmentTime = "Пожалуйста, выберите время приема в будущем";
       }
-    }
-    if (preferredMode === "default") {
-      errors.preferredMode = "Please select preferred mode";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -54,15 +50,14 @@ function AppointmentForm() {
       return;
     }
 
-    // Reset form fields and errors after successful submission
+    // Сброс полей формы и ошибок после успешной отправки
     setPatientName("");
     setPatientNumber("");
     setPatientGender("default");
     setAppointmentTime("");
-    setPreferredMode("default");
     setFormErrors({});
 
-    toast.success("Appointment Scheduled !", {
+    toast.success("Запись на прием успешно создана!", {
       position: toast.POSITION.TOP_CENTER,
       onOpen: () => setIsSubmitted(true),
       onClose: () => setIsSubmitted(false),
@@ -73,12 +68,12 @@ function AppointmentForm() {
     <div className="appointment-form-section">
       <div className="form-container">
         <h2 className="form-title">
-          <span>Book Appointment Online</span>
+          <span>Запись на Прием Онлайн</span>
         </h2>
 
         <form className="form-content" onSubmit={handleSubmit}>
           <label>
-            Patient Full Name:
+            Полное Имя Пациента:
             <input
               type="text"
               value={patientName}
@@ -90,7 +85,7 @@ function AppointmentForm() {
 
           <br />
           <label>
-            Patient Phone Number:
+            Номер Телефона Пациента:
             <input
               type="text"
               value={patientNumber}
@@ -102,22 +97,22 @@ function AppointmentForm() {
 
           <br />
           <label>
-            Patient Gender:
+            Пол Пациента:
             <select
               value={patientGender}
               onChange={(e) => setPatientGender(e.target.value)}
               required
             >
-              <option value="default">Select</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="default">Выберите</option>
+              <option value="male">Мужской</option>
+              <option value="female">Женский</option>
             </select>
             {formErrors.patientGender && <p className="error-message">{formErrors.patientGender}</p>}
           </label>
 
           <br />
           <label>
-            Preferred Appointment Time:
+            Предпочтительное Время Приема:
             <input
               type="datetime-local"
               value={appointmentTime}
@@ -131,10 +126,10 @@ function AppointmentForm() {
 
           <br />
           <button type="submit" className="text-appointment-btn">
-            Confirm Appointment
+            Подтвердить Запись
           </button>
 
-          <p className="success-message" style={{display: isSubmitted ? "block" : "none"}}>Appointment details has been sent to the patients phone number via SMS.</p>
+          <p className="success-message" style={{display: isSubmitted ? "block" : "none"}}>Детали записи отправлены на телефон пациента по SMS.</p>
         </form>
       </div>
 

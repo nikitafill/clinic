@@ -4,9 +4,9 @@ const { Router } = require('express');
 const router = new Router();
 const medicalResultController = require('../controllers/medicalResultController');
 
-router.post("/medicalResult/create", medicalResultController.createMedicalResult);
-router.get("/medicalResult", medicalResultController.getMedicalResultList);
-router.get("/medicalResult/:Id", medicalResultController.getMedicalResultById);
-router.patch("/medicalResult/:Id", medicalResultController.updateMedicalResultById);
+router.post("/create", medicalResultController.createMedicalResult);
+router.get("/", medicalResultController.getMedicalResultList);
+router.get("/:Id", medicalResultController.getMedicalResultById);
+router.patch("/:Id", medicalResultController.updateMedicalResultById);
 
 module.exports = router;

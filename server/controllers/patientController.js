@@ -23,11 +23,11 @@ class PatientController {
 
     async deletePatientById(req, res) {
         try {
-            const patientId = req.params.id;
+            const patientId = req.params.Id;
 
             // Удаление пациента по ID
             const deletedPatient = await Patient.destroy({
-                where: { ID: patientId },
+                where: { Id: patientId },
             });
 
             if (!deletedPatient) {
@@ -43,7 +43,7 @@ class PatientController {
 
     async getPatientById(req, res) {
         try {
-            const patientId = req.params.id;
+            const patientId = req.params.Id;
 
             // Поиск пациента по ID
             const patient = await Patient.findByPk(patientId);
@@ -73,13 +73,13 @@ class PatientController {
 
     async updatePatientById(req, res) {
         try {
-            const patientId = req.params.id;
+            const patientId = req.params.Id;
             const { Name, BirthDate, Gender, Number, Address } = req.body;
 
             // Обновление информации о пациенте
             const updatedPatient = await Patient.update(
                 { Name, BirthDate, Gender, Number, Address },
-                { where: { ID: patientId } }
+                { where: { Id: patientId } }
             );
 
             if (!updatedPatient[0]) {

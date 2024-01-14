@@ -3,50 +3,36 @@ import {Container, Form} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import {NavLink} from "react-router-dom";
-import { REGISTRATION_ROUTE, LOGIN_ROUTE } from "../../Utilts/consts"; 
-import { login } from "../../Components/api/authAPI";
+import {NavLink, useNavigate  } from "react-router-dom";
+import { REGISTRATION_ROUTE, USER_MAIN_MENU_ROUTE } from "../../Utilts/consts"; 
+import { login } from "../../Components/api/authApi";
 import "../../Styles/Auth.css";
-const LoginPage = () => {
+
+const LoginPage = () =>{ 
+
   const [rememberMe, setRememberMe] = useState(false);
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate();
 
   const submit = async () => {
     // Ваша логика входа
-    // ...
-    const response = await login(loginData);
-
-      if (!response) {
-          console.log("Сервис временно недоступен")
-          return;
+    const response = await login(email,password);
+  
+    if (response.error) {
+      console.log("Ошибка входа:", response.error);
+    } else if (response.success) {
+      console.log("Успешный вход!");
+      if (rememberMe) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("isEmployee", response.isEmployee);
+      } else {
+        sessionStorage.setItem("token", response.token);
+        sessionStorage.setItem("isEmployee", response.isEmployee);
       }
-
-      if (response.status === 500) {
-          console.log("Повторите попытку позже");
-          return;
-      }
-
-      if (response.status >= 300) {
-          console.log("Неверные данные аккаунта");
-          return;
-      }
-    // Пример обработки успешного входа
-    if (rememberMe) {
-      // Сохранить токен в локальное хранилище для постоянной сессии
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("role", response.data.role);
-    } else {
-      // Сохранить токен в хранилище сеанса для одной сессии
-      sessionStorage.setItem("token", response.data.token);
-      sessionStorage.setItem("role", response.data.role);
     }
-
-    window.location.reload();
-  };
-
+    navigate(USER_MAIN_MENU_ROUTE);
+  }
   return (
     <Container className="container-style">
     <Card className="card-style p-5">
@@ -55,14 +41,15 @@ const LoginPage = () => {
       <Form.Control
         className="form-control-style"
         placeholder="Введите ваш email..."
-        value={loginData.email}
-        onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value )}
       />
       <Form.Control
         className="form-control-style"
         placeholder="Введите ваш пароль..."
-        value={loginData.password}
-        onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+        value={password}
+        onChange={(e) => setPassword( e.target.value )}
         type="password"
       />
       <Form.Check
@@ -76,7 +63,9 @@ const LoginPage = () => {
           Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
         </div>
         <Button variant="primary"  className="button-style" onClick={submit}>
-          Войти
+          <div>
+            Войти!
+          </div>
         </Button>
       </Row>
     </Form>

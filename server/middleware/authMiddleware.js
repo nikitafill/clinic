@@ -1,19 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-const verifyToken = (req, res, next) => {
-    const token = req.header("Authorization");
-
-    if (!token) {
-        return res.status(401).json({ error: "Access denied" });
+module.exports = function (req, res, next){
+    if(req.method === "OPTIONS"){
+        next()
     }
-
-    try {
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        req.userId = decoded.userId;
-        next();
-    } catch (error) {
-        return res.status(401).json({ error: "Invalid token" });
+    try{
+        const token = req.headers.authorization.split(' ')[1]
+        if(!token){
+            return res.status(401).json({message: "Пользователь не авторизован"})
+        }
+        const decode = jwt.verify(token, process.env.SECRET_KEY)
+        req.user = decode
+        next()
+        
+    } catch (e) {
+        res.status(401).json({message: "Пользователь не авторизован"})
     }
-};
-
-module.exports = verifyToken;
+}

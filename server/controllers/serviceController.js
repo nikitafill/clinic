@@ -19,20 +19,19 @@ class ServiceController {
             res.status(500).json({ error: "Failed to create service" });
         }
     }
-
     async deleteServiceById(req, res) {
         try {
-            const serviceId = req.params.id;
-
+            const serviceId = req.params.Id; // Use req.params.Id
+    
             // Удаление услуги по ID
             const deletedService = await Service.destroy({
-                where: { ID: serviceId },
+                where: { Id: serviceId },
             });
-
+    
             if (!deletedService) {
                 return res.status(404).json({ error: "Service not found" });
             }
-
+    
             res.status(200).json({ success: true });
         } catch (error) {
             console.error(error);
@@ -42,7 +41,7 @@ class ServiceController {
 
     async getServiceById(req, res) {
         try {
-            const serviceId = req.params.id;
+            const serviceId = req.params.Id;
 
             // Поиск услуги по ID
             const service = await Service.findByPk(serviceId);
@@ -63,7 +62,14 @@ class ServiceController {
             // Получение списка всех услуг
             const services = await Service.findAll();
 
-            res.status(200).json(services);
+            const simplifiedServices = services.map(service => ({
+                serviceName: service.Name,
+                price: service.Cost,
+                specialization: service.Specialization
+            }));
+    
+            res.status(200).json(simplifiedServices);
+
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Failed to get service list" });
@@ -72,13 +78,13 @@ class ServiceController {
 
     async updateServiceById(req, res) {
         try {
-            const serviceId = req.params.id;
+            const serviceId = req.params.Id;
             const { Name, Cost, Specialization, Department_Id } = req.body;
 
             // Обновление информации о услуге
             const updatedService = await Service.update(
                 { Name, Cost, Specialization, Department_Id },
-                { where: { ID: serviceId } }
+                { where: { Id: serviceId } }
             );
 
             if (!updatedService[0]) {

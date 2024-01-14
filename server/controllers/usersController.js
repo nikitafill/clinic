@@ -2,44 +2,53 @@ const { Users, Patient, Doctor } = require("../models/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const generateJwt = (Id, email ) => {
+    return jwt.sign(
+        { Id, email },
+        process.env.SECRET_KEY,
+        { expiresIn: '24h' }
+    );
+}
+
 class UsersController {
     async registration(req, res) {
         try {
-            const { email, password, role, patientData } = req.body;
-
+            const { Name, BirthDate, Gender, Number, Adress, email, password } = req.body;
+    
             // Проверка, существует ли уже пользователь с таким email
             const existingUser = await Users.findOne({ where: { email } });
-
             if (existingUser) {
-                return res.status(400).json({ error: "User with this email already exists" });
+                return res.status(401).json({ error: "Registration failed" });
             }
-
+    
             // Хеширование пароля перед сохранением в базу данных
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            // Создание нового пользователя
+            const hashedPassword = await bcrypt.hash(password, 5);
+    
+            // Создание нового пациента
+            const newPatient = await Patient.create({
+                Name,
+                BirthDate,
+                Gender,
+                Number,
+                Adress
+            });
+    
+            // Создание нового пользователя с привязкой к созданному пациенту
             const newUser = await Users.create({
-                email,
+                email: email,
                 password: hashedPassword,
                 IsEmployee: false,
+                PatientId: newPatient.Id  // Используйте id созданного пациента
             });
-
-            // Создание записи в таблице Patient
-            await Patient.create({
-                Name: patientData.name,
-                BirthDate: patientData.birthDate,
-                Gender: patientData.gender,
-                Number: patientData.number,
-                Adress: patientData.adress,
-                UserId: newUser.id,
-            });
-
-            res.status(201).json(newUser);
+    
+            const token= generateJwt( newUser.Id, newUser.email );
+            res.status(201).json({ token });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: "Registration failed" });
+            res.status(500).json({ error: "Registration failed", details: error.message });
         }
     }
+    
 
     async login(req, res) {
         try {
@@ -60,17 +69,20 @@ class UsersController {
             }
 
             // Генерация JWT токена
-            const token = jwt.sign({ userId: user.id, role: user.IsEmployee ? 'Admin' : 'User' }, process.env.SECRET_KEY, {
+            const token= generateJwt( user.Id, user.email,   {
                 expiresIn: "1h",
             });
-
-            res.status(200).json({ token });
+            
+            res.status(201).json({token });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Login failed" });
         }
     }
-
+    async check(req, res, next) {
+        const token = generateJwt(req.user.Id, req.user.email);
+        return res.json({ token });
+    }
     /*async updateRole(req, res) {
         try {
             const { email, role, doctorData } = req.body;

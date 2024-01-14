@@ -14,13 +14,13 @@ const AppRouter = () => {
         const handleStorageChange = () => {
             setToken(localStorage.getItem("token"));
             setTokenSession(sessionStorage.getItem("token"));
-            navigate("/");
+            navigate("/home");
         };
 
         window.addEventListener("storage", handleStorageChange);
     }, [navigate]);
-    ///think about
-    if ((token && localStorage.getItem("role") === "user") || (tokenSession && sessionStorage.getItem("role") === "user")) {
+    
+    if ((token && localStorage.getItem("isEmployee") === false) || (tokenSession && sessionStorage.getItem("isEmployee") === false)) {
         return (
             <Routes>
                 {userRoutes.map(({ path, Component }) => (
@@ -31,7 +31,7 @@ const AppRouter = () => {
         );
     }
 
-    if ((token && localStorage.getItem("role") === "admin") || (tokenSession && sessionStorage.getItem("role") === "admin")) {
+    if ((token && localStorage.getItem("isEmployee") === true) || (tokenSession && sessionStorage.getItem("isEmployee") === true)) {
          return (
              <Routes>
                  {adminRoutes.map(({ path, Component }) => (
@@ -42,7 +42,6 @@ const AppRouter = () => {
          );
     }
 
-    ///think about
     if (!token || !tokenSession) {
         return (
             <Routes>

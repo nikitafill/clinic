@@ -6,7 +6,7 @@ export const createDoctor = async (doctor) => {
 }
 
 export const getAllDoctors = async () => {
-    const {data} = await $host.get('api/doctors')
+    const {data} = await $host.get('api/doctor/')
     return data
 }
 
