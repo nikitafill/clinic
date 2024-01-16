@@ -10,9 +10,6 @@ import AppointmentList from '../Components/AppointmetnList';
 import {getMedicalResultsByPatientInfo} from '../Components/api/medResultAPI';
 import { getAppointmentsByPatientInfo } from '../Components/api/appointmentApi'
 
-
-
-
 const AdminPanel = () => {
 
   const [doctorVisible, setDoctor] = useState(false);
@@ -41,7 +38,6 @@ const AdminPanel = () => {
       data = await getAppointmentsByPatientInfo(patient);
       console.log("Fetched service data:", data);
       setAppointments(data);
-      setShowModal(false);
     } catch (error) {
       console.error('Error fetching medical results:', error);
     }

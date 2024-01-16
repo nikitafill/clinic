@@ -4,7 +4,6 @@ import Profile from "../Pages/Profile";
 import Services from "../Pages/Service";
 import Prices from "../Pages/Price";
 import Doctors from "../Pages/Doctors";
-/*import Appointment from "../Pages/Doctors";*/
 import CardioDep from "../Pages/Departments/Cardio";
 import EndoDep from "../Pages/Departments/Endo";
 import NeuroDep from "../Pages/Departments/Neuro";
