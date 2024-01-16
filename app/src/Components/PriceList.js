@@ -3,6 +3,7 @@ import "../Styles/Price.css";
 import "../Styles/Table.css";
 import BasicTable  from "./Table";
 import { getAllService } from "../Components/api/servicesAPI";
+
 function PriceList() {
   const [serviceData, setServiceData] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);

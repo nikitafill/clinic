@@ -7,6 +7,5 @@ router.get("/", doctorController.getDoctorList);
 router.get("/:Id", doctorController.getDoctorById);
 router.delete("/:Id", doctorController.deleteDoctorById);
 router.patch("/:Id", doctorController.updateDoctorById);
-
-
+router.get('/:name', doctorController.getDoctorsByDepartmentName);
 module.exports = router;

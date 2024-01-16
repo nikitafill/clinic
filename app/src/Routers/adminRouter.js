@@ -69,7 +69,7 @@ export const adminRoutes = [
         Component: EndoDep,
     },
     {
-        path: "/profile",
+        path: "/adminPanel",
         Component: AdminPanel,
     },
 ];

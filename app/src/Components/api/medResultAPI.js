@@ -5,11 +5,23 @@ export const getAllMedicalResultsByPatientId = async (Id) => {
     return data
 }
 
-export const createMedicalResult = async (Patient_Id, MedicalResult) => {
-    const {data} = await $authHost.post('api/profile/${Patietn_Id}/create'+ Patient_Id,  MedicalResult)
+export const createMedicalResult = async (medicalResult) => {
+    const {data} = await $authHost.post('api/medicalResult/create', medicalResult)
     return data
 }
 export const updMMedicalResult = async (Doctor_Id, Id,updatedMedicalResult) => {
     const {data} = await $authHost.put(`api/profile/Patient/${Doctor_Id}/${Id}`, updatedMedicalResult);
     return data;
 }
+// GET-запрос
+export const getMedicalResultsByDoctorId = async (doctorId) => {
+      const { data } = await $authHost.get(`api/medicalResult/doctor/${doctorId}`);
+      return data;
+};
+  
+  // POST-запрос
+export const getMedicalResultsByPatientInfo = async (patient) => {
+      const { data } = await $authHost.post(`api/medicalResult/patient`, patient);
+      return data;
+};
+  

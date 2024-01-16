@@ -1,4 +1,4 @@
-const {Users,  Doctor } = require("../models/models");
+const {Users, Department,  Doctor } = require("../models/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -9,7 +9,7 @@ const generateJwt = (Id, email ) => {
         { expiresIn: '24h' }
     );
 }
-
+const textValue = 'Отделение кардиологии';
 class DoctorController {
     async createDoctor(req, res) {
         try {
@@ -67,7 +67,7 @@ class DoctorController {
 
     async getDoctorById(req, res) {
         try {
-            const doctorId = req.params.id;
+            const doctorId = req.params.Id;
 
             // Поиск доктора по ID
             const doctor = await Doctor.findByPk(doctorId);
@@ -82,7 +82,32 @@ class DoctorController {
             res.status(500).json({ error: "Failed to get doctor by ID" });
         }
     }
-
+    async getDoctorsByDepartmentName(req, res) {
+        try {
+          const departmentName = req.params.encodeURIComponent(name);
+      
+          // Поиск департамента по названию
+          const department = await Department.findOne({
+            where: { Specialization: departmentName },
+          });
+      
+          if (!department) {
+            return res.status(404).json({ error: "Department not found" });
+          }
+      
+          const departmentId = department.Id;
+      
+          // Поиск врачей по Id департамента
+          const doctors = await Doctor.findAll({
+            where: { DepartmentId: departmentId },
+          });
+      
+          res.status(200).json({ departmentId, doctors });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: "Failed to get doctors by department name" });
+        }
+    }
     async getDoctorList(req, res) {
         try {
             // Получение списка всех докторов

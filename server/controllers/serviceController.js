@@ -1,16 +1,16 @@
-const { Service } = require("../models/models");
+const { Department, Service } = require("../models/models");
 
 class ServiceController {
     async createService(req, res) {
         try {
-            const { Name, Cost, Specialization, Department_Id } = req.body;
+            const { Name, Cost, Specialization, DepartmentId } = req.body;
 
             // Создание новой услуги
             const newService = await Service.create({
                 Name,
                 Cost,
                 Specialization,
-                Department_Id,
+                DepartmentId,
             });
 
             res.status(201).json(newService);
@@ -75,7 +75,33 @@ class ServiceController {
             res.status(500).json({ error: "Failed to get service list" });
         }
     }
-
+    async getServicesByDepartmentName(req, res) {
+        try {
+          const departmentName = req.params.name;
+      
+          // Поиск департамента по названию
+          const department = await Department.findOne({
+            where: { Name: departmentName },
+          });
+      
+          if (!department) {
+            return res.status(404).json({ error: "Department not found" });
+          }
+      
+          const departmentId = parseInt(department.Id, 10);
+      
+          // Поиск услуг по Id департамента
+          const services = await Service.findAll({
+            where: { DepartmentId: departmentId },
+          });
+      
+          res.status(200).json({ departmentId, services });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: "Failed to get services by department name" });
+        }
+      }
+      
     async updateServiceById(req, res) {
         try {
             const serviceId = req.params.Id;

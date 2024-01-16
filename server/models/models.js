@@ -5,26 +5,6 @@ const Users = sequelize.define('Users', {
   Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING(50), allowNull: false },
   password: { type: DataTypes.STRING(255), allowNull: false },
-  /*Patient_Id: {
-      type: DataTypes.INTEGER,
-      validate: {
-          onlyOneIdPresent() {
-              if ((this.Patient_Id !== null && this.Doctor_Id !== null) || (this.Patient_Id === null && this.Doctor_Id === null)) {
-                  throw new Error('Either Patient_Id or Doctor_Id should be present');
-              }
-          },
-      },
-  },*/
-  /*Doctor_Id: {
-      type: DataTypes.INTEGER,
-      validate: {
-          onlyOneIdPresent() {
-              if ((this.Patient_Id !== null && this.Doctor_Id !== null) || (this.Patient_Id === null && this.Doctor_Id === null)) {
-                  throw new Error('Either Patient_Id or Doctor_Id should be present');
-              }
-          },
-      },
-  },*/
   IsEmployee: { type: DataTypes.BOOLEAN, allowNull: false },
   },
   {timestamps: false});
@@ -32,7 +12,7 @@ const Users = sequelize.define('Users', {
   const MedicalResult = sequelize.define('MedicalResult', {
     Id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     Diagnose: { type: DataTypes.STRING(50), allowNull: false },
-    Conclusion: { type: DataTypes.STRING(50) },
+    Conclusion: { type: DataTypes.STRING(255) },
     Date: { type: DataTypes.DATE },
     //Doctor_Id: { type: DataTypes.INTEGER, allowNull: false },
     //Patietn_Id: { type: DataTypes.INTEGER, allowNull: false },
@@ -90,9 +70,6 @@ const Users = sequelize.define('Users', {
 
   Patient.hasMany(Users);
   Users.belongsTo(Patient);
-
-  Appointment.hasMany(MedicalResult);
-  MedicalResult.belongsTo(Appointment);
 
   Doctor.hasMany(MedicalResult);
   MedicalResult.belongsTo(Doctor);

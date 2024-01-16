@@ -1,6 +1,6 @@
 import LoginPage from "../Pages/Authorization/Auth";
 import Home from "../Pages/Home";
-//import Profile from "../Pages/Profile";
+import Profile from "../Pages/Profile";
 import Services from "../Pages/Service";
 import Prices from "../Pages/Price";
 import Doctors from "../Pages/Doctors";

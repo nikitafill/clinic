@@ -13,7 +13,7 @@ router.use('/users', usersRouter);
 router.use('/service', serviceRouter);
 router.use('/patient', patientRouter);
 router.use('/medicalResult', medicalResultRouter);
-router.use('/doctorSchedule', doctorScheduleRouter);
+router.use('/schedule', doctorScheduleRouter);
 router.use('/doctor', doctorRouter);
 router.use('/appointment', appointmentRouter);
 router.use('/department', departmentRouter);

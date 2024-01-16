@@ -35,14 +35,15 @@ const LoginPage = () => {
       setError(true);
       return;
     }
-    
-    if (rememberMe) {
+    localStorage.setItem("token", response.token);
+    localStorage.setItem("isEmployee", response.isEmployee);
+    /*if (rememberMe) {
       localStorage.setItem("token", response.token);
       localStorage.setItem("isEmployee", response.isEmployee);
     } else {
       sessionStorage.setItem("token", response.token);
       sessionStorage.setItem("isEmployee", response.isEmployee);
-    }
+    }*/
 
     setTimeout(() => {
       navigate('/home');

@@ -9,4 +9,7 @@ router.get("/", medicalResultController.getMedicalResultList);
 router.get("/:Id", medicalResultController.getMedicalResultById);
 router.patch("/:Id", medicalResultController.updateMedicalResultById);
 
+router.get("/doctor/:doctorId", medicalResultController.getMedicalResultsByDoctorId);
+router.post("/patient", medicalResultController.getMedicalResultsByPatientInfo);
+
 module.exports = router;

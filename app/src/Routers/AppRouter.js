@@ -26,7 +26,7 @@ const AppRouter = () => {
                 {userRoutes.map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} exact />
                 ))}
-                <Route key="*" path="*" element={<Navigate to={USER_MAIN_MENU_ROUTE} />} />
+                <Route key="*" path="*" element={<Navigate to={ADMIN_APPOITMENTS_ROUTE} />} />
             </Routes>
         );
     }

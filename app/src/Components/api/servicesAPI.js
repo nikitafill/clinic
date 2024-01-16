@@ -10,8 +10,10 @@ export const getAllService = async () => {
     return data
 }*/
 export const createService = async (service) => {
-    console.log('Before request:', service);
-    const {data} = await $host.post('api/service/create', service);
-    console.log('After request:', data);
+    const {data} = await $authHost.post('api/service/create', service);
     return data;
+}
+export const getServicesByDepartmentName = async (departmentName) =>{
+    const {data} = await $host.get('api/service/' + departmentName)
+    return data
 }

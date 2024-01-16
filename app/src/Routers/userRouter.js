@@ -13,17 +13,17 @@ import UrolDep from "../Pages/Departments/Urol";
 import OrthDep from "../Pages/Departments/Orth";
 import RegistrationPage from "../Pages/Authorization/Registration";
 import Appointment from "../Components/AppointmentForm";
-import AdminPanel from "../Pages/AdminPanel";
+import Profile from "../Pages/Profile";
 
 export const userRoutes = [
-    {
+    /*{
         path: "/login",
         Component: LoginPage,
     },
     {
         path: "/registration",
         Component: RegistrationPage,
-    },
+    },*/
     {
         path: "/home",
         Component: Home,
@@ -70,6 +70,6 @@ export const userRoutes = [
     },
     {
         path: "/profile",
-        Component: AdminPanel,
+        Component: Profile,
     },
 ];

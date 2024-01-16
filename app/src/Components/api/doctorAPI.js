@@ -16,3 +16,7 @@ export const deleteDoctor = async (id) => {
     const {data} = await $authHost.delete('api/doctors/delete' + id)
     return data
 }
+export const getDoctorsByDepartmentName = async (departmentName) =>{
+    const {data} = await $host.get('api/doctor/' + departmentName)
+    return data
+}

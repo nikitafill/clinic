@@ -1,52 +1,55 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { createMedicalResult } from "../api/medResultAPI";
+import { Modal, Button, Form } from 'react-bootstrap';
+import { createMedicalResult } from '../api/medResultAPI';
 
-const MedicalResultForm = ({ patientId, onMedicalResultAdded }) => {
+const CreateMedResult = () => {
   const [diagnose, setDiagnose] = useState('');
   const [conclusion, setConclusion] = useState('');
   const [date, setDate] = useState('');
-  const [doctorId, setDoctorId] = useState(''); // Добавлено поле для ввода doctorId
-  const [appointmentId, setAppointmentId] = useState(''); // Добавлено поле для ввода appointmentId
+  const [patientName, setPatientName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [doctorName, setDoctorName] = useState('');
 
-  const handleCreateMedicalResult = async (e) => {
-    e.preventDefault();
-
-    // Проверка на валидность данных
-    if (!diagnose || !date) {
-      // Обработка пустых полей
-      return;
-    }
-
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    // Prepare data to be sent to the server
     const medicalResultData = {
-      diagnose: diagnose,
-      conclusion: conclusion,
-      date: date,
-      doctorId: doctorId,
-      patientId: patientId,
-      appointmentId: appointmentId,
+      diagnose,
+      conclusion,
+      date,
+      patientName,
+      phoneNumber,
+      doctorName,
     };
 
-    try {
-      const response = await createMedicalResult(patientId, medicalResultData);
+    // Example: send data to the server using the createMedicalResult function
+    createMedicalResult(medicalResultData)
+      .then((response) => {
+        // Handle success if needed
+        console.log('Medical result added successfully:', response);
+        // Additional logic...
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error('Failed to add medical result:', error.response);
+        // Additional error handling...
+      });
 
-      if (response.status >= 300) {
-        console.error("Ошибка при создании медицинского результата. Код: " + response.status);
-        return;
-      }
+    // Clear form fields
+    setDiagnose('');
+    setConclusion('');
+    setDate('');
+    setPatientName('');
+    setPhoneNumber('');
+    setDoctorName('');
 
-      // Успешное создание медицинского результата, вызываем callback для обновления данных на родительской странице
-      onMedicalResultAdded();
-    } catch (error) {
-      console.log("Error while creating medical result:", error);
-    }
+    // Close the modal
   };
 
   return (
     <div className="form-container">
-      <Form className="custom-form" onSubmit={handleCreateMedicalResult}>
-        <h4 style={{ marginBottom: '2rem' }}>Введите медицинский результат</h4>
+      <Form className="custom-form" onSubmit={handleSubmit}>
+        <h4 style={{ marginBottom: '2rem' }}>Добавление медицинского результата</h4>
         <Form.Group controlId="formDiagnose">
           <Form.Label>Диагноз</Form.Label>
           <Form.Control
@@ -73,35 +76,40 @@ const MedicalResultForm = ({ patientId, onMedicalResultAdded }) => {
             onChange={(e) => setDate(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="formDoctorId">
-          <Form.Label>Идентификатор врача</Form.Label>
+        {/* Add fields for patient name, phone number, and doctor name */}
+        <Form.Group controlId="formPatientName">
+          <Form.Label>Имя пациента</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Введите идентификатор врача"
-            value={doctorId}
-            onChange={(e) => setDoctorId(e.target.value)}
+            placeholder="Введите имя пациента"
+            value={patientName}
+            onChange={(e) => setPatientName(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="formAppointmentId">
-          <Form.Label>Идентификатор назначения</Form.Label>
+        <Form.Group controlId="formPhoneNumber">
+          <Form.Label>Номер телефона</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Введите идентификатор назначения"
-            value={appointmentId}
-            onChange={(e) => setAppointmentId(e.target.value)}
+            placeholder="Введите номер телефона"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </Form.Group>
-        <Button
-          className="custom-button"
-          variant="primary"
-          type="submit"
-        >
-          Создать медицинский результат
+        <Form.Group controlId="formDoctorName">
+          <Form.Label>Имя доктора</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Введите имя доктора"
+            value={doctorName}
+            onChange={(e) => setDoctorName(e.target.value)}
+          />
+        </Form.Group>
+        <Button className="custom-button" variant="primary" type="submit">
+          Добавить
         </Button>
       </Form>
     </div>
   );
 };
 
-export default MedicalResultForm;
-
+export default CreateMedResult;

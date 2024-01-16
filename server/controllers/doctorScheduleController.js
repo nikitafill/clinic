@@ -39,24 +39,26 @@ class DoctorScheduleController {
             res.status(500).json({ error: "Failed to delete doctor schedule" });
         }
     }
-
     async getDoctorScheduleById(req, res) {
         try {
-            const scheduleId = req.params.id;
-
-            // Поиск расписания по ID
-            const schedule = await DoctorSchedule.findByPk(scheduleId);
-
-            if (!schedule) {
-                return res.status(404).json({ error: "Doctor schedule not found" });
-            }
-
-            res.status(200).json(schedule);
+          const doctorId = req.params.doctorId;
+      
+          // Поиск расписания по DoctorId
+          const schedules = await DoctorSchedule.findAll({
+            where: { DoctorId: doctorId }
+          });
+      
+          if (!schedules || schedules.length === 0) {
+            return res.status(404).json({ error: "Doctor schedules not found" });
+          }
+      
+          res.status(200).json(schedules);
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Failed to get doctor schedule by ID" });
+          console.error(error);
+          res.status(500).json({ error: "Failed to get doctor schedule by DoctorId" });
         }
     }
+      
 
     async updateDoctorScheduleById(req, res) {
         try {
