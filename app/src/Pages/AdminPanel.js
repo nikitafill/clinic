@@ -9,7 +9,6 @@ import MedicalResultsList from '../Components/MedicalResultList';
 import AppointmentList from '../Components/AppointmetnList';
 import {getMedicalResultsByPatientInfo} from '../Components/api/medResultAPI';
 import { getAppointmentsByPatientInfo } from '../Components/api/appointmentApi'
-
 const AdminPanel = () => {
 
   const [doctorVisible, setDoctor] = useState(false);
@@ -21,10 +20,9 @@ const AdminPanel = () => {
   const [showModal, setShowModal] = useState(false);
   const [medicalResults, setMedicalResults] = useState([]);
   const [appointments, setAppointments] = useState([]);
-  const patient = {
-    patientName,
-    phoneNumber
-  };
+
+  const patient = {patientName,phoneNumber};
+
   const handleSearch = async () => {
     //e.preventDefault();
     try {
@@ -42,21 +40,23 @@ const AdminPanel = () => {
       console.error('Error fetching medical results:', error);
     }
   };
-  //const [doctorId, setDoctorId] = useState(null);
-  /*const handleConfirmId = async () => {
+
+  const [doctorId, setDoctorId] = useState(null);
+  const handleLoadSchedule = async () => {
     try {
-      // Ваш запрос на сервер для подтверждения ID врача
-      const response = await getSchedule(doctorId); // или другой подход для подтверждения ID
-      const data = await response.json();
+      // Ваш запрос на сервер для получения расписания по ID врача
+      const response = await getSchedule(doctorId);
+      const data = JSON.parse(await response.text());
+
       if (data) {
-        // Обработка успешного подтверждения ID, если необходимо
+        // Обработка успешного получения расписания, если необходимо
       } else {
-        // Обработка неуспешного подтверждения ID, если необходимо
+        // Обработка неуспешного получения расписания, если необходимо
       }
     } catch (error) {
-      console.error('Error confirming ID:', error);
-    }
-    };*/
+      console.error('Error loading schedule:', error);
+    } 
+  };
     return (
 
         <Container className="d-flex flex-column" style={{ marginBottom: '64px' }}>
@@ -137,21 +137,28 @@ const AdminPanel = () => {
             {serviceVisible && <CreateServiceForm onHide={() => setService(false)} />}*/}
 
 
-            {/*<div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
             <Form.Group controlId="formDoctorId" className="mb-3" style={{ width: '20%' }}>
                 <Form.Label>Введите ID врача:</Form.Label>
                 <Form.Control
                     type="text"
                     placeholder="Введите ID врача"
                     value={doctorId}
-                    onChange={(e) => setDoctorId(e.target.value)}
+                    onChange={(e) => {
+                      setDoctorId(e.target.value);
+                    }}
                 />
             </Form.Group>
-            <Button variant="primary" className="mt-4" style={{ width: '20%' }} onChange={handleConfirmId}>
-                Подтвердить ID
+            <Button
+              variant="primary"
+              className="mt-4"
+              style={{ width: '20%' }}
+              onClick={handleLoadSchedule}
+            >     
+              Подтвердить ID и загрузить расписание
             </Button>
             </div>
-            <Schedule doctorId={doctorId} />*/}
+            <Schedule doctorId={doctorId} />
         </Container>
     );
 };

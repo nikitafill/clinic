@@ -56,11 +56,26 @@ export const registration = async (userData) => {
     const response = await $host.post("api/users/registration", userData);
     return response;
 };
-
 export const login = async (email, password) => {
-    const response  = await $host.post("api/users/login", { email, password } );
-    return response;
+    try {
+        const data = await $host.post("api/users/login", { email, password });
+        // Сохранение токена в localStorage
+        localStorage.setItem('token', data.token);
+        console.log('Token:', data.token);
+        return data;
+
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
+/*export const login = async (email, password) => {
+    const data  = await $host.post("api/users/login", { email, password } );
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('isEmployee', data.isEmployee);
+    return data;
+    //return jwtDecode(data.token)
+}*/
 
 export const check = async (email) => {
     const response = await $authHost.post('api/users/auth',email);

@@ -67,8 +67,4 @@ export const publicRoutes = [
         path: "/services/endo",
         Component: EndoDep,
     },
-    {
-        path: "/profile",
-        Component: AdminPanel,
-    },
 ];

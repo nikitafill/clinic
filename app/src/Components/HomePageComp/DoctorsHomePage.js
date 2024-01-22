@@ -11,7 +11,7 @@ function Doctors() {
     <div className="doctor-section" id="doctors">
       <div className="dt-title-content">
         <h3 className="dt-title">
-          <span>Наши доктора</span>
+          <span>Наши врачи</span>
         </h3>
 
         <p className="dt-description">
@@ -25,24 +25,38 @@ function Doctors() {
       <div className="dt-cards-content">
         <DoctorCard
           img={profile1}
-          name="Dr. Kathryn Murphy"
-          title="General Surgeons"
-          stars="4.9"
-          reviews="1800"
+          name="Елена Иванова"
+          title="Гинеколог"
+          workExp="10"
         />
+        {/*{doctorData.map((data, index) => (
+        <DoctorCard key={index} img={profile1} data={data} />
+        ))}
+        <DoctorCard
+           key={index} img={profile1} data = {doctorData}
+        />
+        <DoctorCard
+          key={index} img={profile1} data = {doctorData} 
+        />
+        <DoctorCard key={index} img={profile1} data = {doctorData}
+        />*/}
         <DoctorCard
           img={profile2}
-          name="Dr. Jacob Jones"
-          title="Hematologists"
-          stars="4.8"
-          reviews="700"
+          name="Алексей Петров"
+          title="Кардиолог"
+          workExp="7"
         />
-        <DoctorCard
+        {/*<DoctorCard
           img={profile3}
           name="Dr. Jenny Wilson"
           title="Endocrinologists"
-          stars="4.7"
-          reviews="450"
+          workExp="4"
+      />*/}
+        <DoctorCard
+          img={profile4}
+          name="Иван Сидоров"
+          title="Уролог"
+          workExp="3"
         />
       </div>
     </div>

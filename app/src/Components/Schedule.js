@@ -32,10 +32,10 @@ const Schedule = ({ doctorId }) => {
         </thead>
         <tbody>
           {scheduleData.map((item) => (
-            <tr key={item.id}>
-              <td>{item.day}</td>
-              <td>{item.startTime}</td>
-              <td>{item.endTime}</td>
+            <tr key={item.Id}>
+              <td>{item.Day_of_week}</td>
+              <td>{item.Start}</td>
+              <td>{item.End}</td>
             </tr>
           ))}
         </tbody>

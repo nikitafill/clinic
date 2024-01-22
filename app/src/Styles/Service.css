@@ -44,6 +44,8 @@
 .info-cards-content a:hover {
   color: inherit; /* Использование цвета текста родительского элемента при наведении */
 }
-.info-cards-content{
+
+.info-cards-content  { /* Использование цвета текста родительского элемента при наведении */
+  /*gap:30px;*/
   margin-left: 64px;
 }

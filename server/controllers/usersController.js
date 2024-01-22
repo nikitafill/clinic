@@ -2,9 +2,9 @@ const { Users, Patient, Doctor } = require("../models/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const generateJwt = (Id, email ) => {
+const generateJwt = (Id, email,IsEmployee) => {
     return jwt.sign(
-        { Id, email },
+        { Id, email,IsEmployee},
         process.env.SECRET_KEY,
         { expiresIn: '24h' }
     );
@@ -41,7 +41,7 @@ class UsersController {
                 PatientId: newPatient.Id  // Используйте id созданного пациента
             });
     
-            const token= generateJwt( newUser.Id, newUser.email );
+            const token= generateJwt( newUser.Id, newUser.email, newUser.IsEmployee );
             res.status(201).json({ token });
         } catch (error) {
             console.error(error);
@@ -54,6 +54,9 @@ class UsersController {
         try {
             const { email, password } = req.body;
 
+            if(!email || !password){
+                return res.status(401).json({ error: "Authentication failed" });
+            }
             // Поиск пользователя по email
             const user = await Users.findOne({ where: { email } });
 
@@ -69,66 +72,18 @@ class UsersController {
             }
 
             // Генерация JWT токена
-            const token= generateJwt( user.Id, user.email,   {
-                expiresIn: "1h",
-            });
+            const token= generateJwt( user.Id, user.email,user.IsEmployee);
             
-            res.status(201).json({token });
+            res.status(201).json({token, isEmployee: user.IsEmployee});
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Login failed" });
         }
     }
     async check(req, res, next) {
-        const token = generateJwt(req.user.Id, req.user.email);
+        const token = generateJwt(req.user.Id, req.users.email, req.users.IsEmployee);
         return res.json({ token });
     }
-    /*async updateRole(req, res) {
-        try {
-            const { email, role, doctorData } = req.body;
-
-            // Найти пользователя в базе данных по email
-            const user = await Users.findOne({ where: { email } });
-
-            if (!user) {
-                return res.status(404).json({ error: "User not found" });
-            }
-
-            // Проверка, чтобы избежать изменения роли пользователя на "Doctor",
-            // если он уже является работником
-            if (user.IsEmployee) {
-                return res.status(400).json({ error: "User is already an employee" });
-            }
-
-            // Удаление записи из таблицы Patient
-            await Patient.destroy({ where: { UserId: user.id } });
-
-            // Вернуть подтверждение клиенту для второго этапа
-            res.status(200).json({ confirmation: true });
-
-            // Обработка второго этапа (ввод данных доктора)
-            const { name, specialization, workExp, departmentId } = doctorData;
-
-            // Создать новую запись в соответствующей таблице (например, "Doctor")
-            const doctor = await Doctor.create({
-                Name: name,
-                Specialization: specialization,
-                WorkExp: workExp,
-                Department_Id: departmentId,
-            });
-
-            // Обновить запись пользователя
-            await user.update({
-                Doctor_Id: doctor.id,
-                IsEmployee: true,
-            });
-
-            res.status(200).json({ success: true });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Role update failed" });
-        }
-    }*/
 }
 
 module.exports = new UsersController();

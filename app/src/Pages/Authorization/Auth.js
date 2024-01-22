@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { REGISTRATION_ROUTE, USER_MAIN_MENU_ROUTE } from "../../Utilts/consts";
 import { login } from "../../Components/api/authApi";
 import "../../Styles/Auth.css";
-
+import { jwtDecode } from "jwt-decode";
 const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -16,6 +16,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const submit = async () => {
+
     const response = await login(email, password);
 
     if (!response) {
@@ -23,7 +24,7 @@ const LoginPage = () => {
       setError(true);
       return;
     }
-
+    console.log('Data:', response);
     if (response.status === 500) {
       setErrorMessage("Повторите попытку позже");
       setError(true);
@@ -35,16 +36,9 @@ const LoginPage = () => {
       setError(true);
       return;
     }
-    localStorage.setItem("token", response.token);
-    localStorage.setItem("isEmployee", response.isEmployee);
-    /*if (rememberMe) {
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("isEmployee", response.isEmployee);
-    } else {
-      sessionStorage.setItem("token", response.token);
-      sessionStorage.setItem("isEmployee", response.isEmployee);
-    }*/
-
+    
+    localStorage.setItem("isEmployee", response.data.isEmployee);
+    localStorage.setItem("token", response.data.token);
     setTimeout(() => {
       navigate('/home');
       window.location.reload();
@@ -70,12 +64,12 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
-          <Form.Check
+          {/*<Form.Check
             className="checkbox-style"
             type="checkbox"
             label="Запомнить меня"
             onChange={(e) => setRememberMe(e.target.checked)}
-          />
+          />*/}
           <Row className="row-style">
             <div>
               Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>

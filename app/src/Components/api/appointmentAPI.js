@@ -18,14 +18,14 @@ export const getAppointmentByPatientId = async (Id) => {
 }
 export const getAppointmentsByDoctorId = async (doctorId) => {
     
-      const { data } = await $authHost.get(`api/appointment/doctor/${doctorId}`);
-      return data;
+    const { data } = await $authHost.get(`api/appointment/doctor/${doctorId}`);
+    return data;
     
 };
   
   // POST-запрос
 export const getAppointmentsByPatientInfo = async (patient) => {
-      const { data } = await $authHost.post(`api/appointment/patient`, patient);
-      return data;
+    const { data } = await $authHost.post(`api/appointment/patient`, patient);
+    return data;
 };
   

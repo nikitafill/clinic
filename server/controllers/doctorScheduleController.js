@@ -41,7 +41,7 @@ class DoctorScheduleController {
     }
     async getDoctorScheduleById(req, res) {
         try {
-          const doctorId = req.params.doctorId;
+          const doctorId = req.params.Id;
       
           // Поиск расписания по DoctorId
           const schedules = await DoctorSchedule.findAll({

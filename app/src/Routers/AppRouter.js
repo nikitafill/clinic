@@ -20,7 +20,7 @@ const AppRouter = () => {
         window.addEventListener("storage", handleStorageChange);
     }, [navigate]);
     
-    if ((token && localStorage.getItem("isEmployee") === false) || (tokenSession && sessionStorage.getItem("isEmployee") === false)) {
+    if ((token && localStorage.getItem("isEmployee") === "false") /*|| (tokenSession && sessionStorage.getItem("isEmployee") === false)*/) {
         return (
             <Routes>
                 {userRoutes.map(({ path, Component }) => (
@@ -31,7 +31,7 @@ const AppRouter = () => {
         );
     }
 
-    if ((token && localStorage.getItem("isEmployee") === true) || (tokenSession && sessionStorage.getItem("isEmployee") === true)) {
+    if ((token && localStorage.getItem("isEmployee") === "true") /*|| (tokenSession && sessionStorage.getItem("isEmployee") === true)*/) {
          return (
              <Routes>
                  {adminRoutes.map(({ path, Component }) => (

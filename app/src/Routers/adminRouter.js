@@ -1,19 +1,16 @@
-import LoginPage from "../Pages/Authorization/Auth";
 import Home from "../Pages/Home";
-//import Profile from "../Pages/Profile";
 import Services from "../Pages/Service";
 import Prices from "../Pages/Price";
 import Doctors from "../Pages/Doctors";
-/*import Appointment from "../Pages/Doctors";*/
+import Appointment from "../Components/AppointmentForm";
+import AdminPanel from "../Pages/AdminPanel";
+/*Departmets";*/
 import CardioDep from "../Pages/Departments/Cardio";
 import EndoDep from "../Pages/Departments/Endo";
 import NeuroDep from "../Pages/Departments/Neuro";
 import GynaecDep from "../Pages/Departments/Gynaec";
 import UrolDep from "../Pages/Departments/Urol";
 import OrthDep from "../Pages/Departments/Orth";
-import RegistrationPage from "../Pages/Authorization/Registration";
-import Appointment from "../Components/AppointmentForm";
-import AdminPanel from "../Pages/AdminPanel";
 
 export const adminRoutes = [
     /*{
@@ -69,7 +66,7 @@ export const adminRoutes = [
         Component: EndoDep,
     },
     {
-        path: "/adminPanel",
+        path: "/profile",
         Component: AdminPanel,
     },
 ];

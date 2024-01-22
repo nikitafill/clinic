@@ -74,15 +74,15 @@ function AppointmentForm() {
     const errors = {};
     if (!patientName.trim()) {
       errors.patientName = "Требуется указать имя пациента";
-    } else if (patientName.trim().length < 8) {
+    } /*else if (patientName.trim().length < 8) {
       errors.patientName = "Имя пациента должно содержать не менее 8 символов";
-    }
+    }*/
 
     if (!patientNumber.trim()) {
       errors.patientNumber = "Требуется указать номер телефона пациента";
-    } else if (patientNumber.trim().length < 6) {
+    } /*else if (patientNumber.trim().length < 6) {
       errors.patientName = "Номер пациента должен содержать не менее 6 символов";
-    }
+    }*/
 
     if (patientGender === "default") {
       errors.patientGender = "Пожалуйста, выберите пол пациента";
@@ -140,7 +140,7 @@ function AppointmentForm() {
     <div className="appointment-form-section">
       <div className="form-container">
         <h2 className="form-title">
-          <span>Запись на Прием Онлайн</span>
+          <span>Запись на прием онлайн</span>
         </h2>
 
         <form className="form-content" onSubmit={handleSubmit}>
@@ -176,8 +176,8 @@ function AppointmentForm() {
               required
             >
               <option value="default">Выберите</option>
-              <option value="male">Мужской</option>
-              <option value="female">Женский</option>
+              <option value="Мужской">Мужской</option>
+              <option value="Женский">Женский</option>
             </select>
             {formErrors.patientGender && <p className="error-message">{formErrors.patientGender}</p>}
           </label>
@@ -251,10 +251,10 @@ function AppointmentForm() {
 
           <br />
           <button type="submit" className="text-appointment-btn">
-            Подтвердить Запись
+                Подтвердить Запись
           </button>
 
-          <p className="success-message" style={{display: isSubmitted ? "block" : "none"}}>Детали записи отправлены на телефон пациента по SMS.</p>
+          {/*<p className="success-message" style={{display: isSubmitted ? "block" : "none"}}>Детали записи отправлены на телефон пациента по SMS.</p>*/}
         </form>
       </div>
 
